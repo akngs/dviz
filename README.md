@@ -12,7 +12,7 @@ embedding visual representations such as sparklines or conventional
 statistical charts into HTML document without using the hand-written scripts
 or graph drawing tools.
 
-All you need to do is writing a plain HTML document. DViz than automatically
+All you need to do is writing a plain HTML document. DViz then automatically
 detects data elements embedded in the document and turns them into cognitively
 efficient visualizations on the fly.
 
