@@ -14,21 +14,108 @@
     <script type="text/javascript">$(function() {dviz.run();});</script>
     <title>DViz examples</title>
 </head>
-<body>
-<div class="dviz-content">
+<body style="margin: 1em;">
+<div class="dviz-content" style="max-width: 500px;">
 
-<p>Google Visualization API:</p>
-<pre>
-   <code>
-   Name, A, B
-   Apple, 1323, 1232
-   Orange, 3563, 2452
-   Banana, 1356, 3222
-   </code>
-</pre>
+<h2>Sparkline</h2>
+<p>Parallel sparklines:</p>
+<ul>
+    <li>A: <code>5, 3, 7, 1, 3, 7, 9 (@sparkline)</code></li>
+    <li>B: <code>5, 4, 3, 8, 8, 9, 10 (@sparkline)</code></li>
+    <li>C: <code>3, 7, 1, 7, 8, 1, 5 (@sparkline)</code></li>
+</ul>
+<p>Embedded <code>1, 1, 2, 3, 5, 8 (@sparkline)</code> sparkline.</p>
+
+<h2>Bar Chart</h2>
+<p>Single column bar chart:</p>
+<pre><code>
+    Name, Count
+    Apple, 1352
+    Orange, 5997
+    Banana, 5287
+</code></pre>
 <p><code>(@bar)</code></p>
 
-<p>D3 sparkline: <code>1,3,5,2,3,5,7,3 (@sparkline)</code></p>
+<p>Multi-column bar chart:</p>
+<pre><code>
+Name, A, B
+Apple, 965, 387
+Orange, 2944, 3053
+Banana, 4170, 1117
+</code></pre>
+<p><code>(@bar)</code></p>
+
+<p>Stacked bar chart:</p>
+<pre><code>
+Name, A, B
+Apple, 965, 387
+Orange, 2944, 3053
+Banana, 4170, 1117
+</code></pre>
+<p><code>(@bar {isStacked:true})</code></p>
+
+<p>DViz automatically changes color scheme according to number of columns:</p>
+<pre><code>
+Name, A, B, C
+Apple, 965, 387, 100
+Orange, 2944, 3053, 200
+Banana, 4170, 1117, 500
+</code></pre>
+<p><code>(@bar {isStacked:true})</code></p>
+
+<h2>Line chart</h2>
+<pre><code>
+Name, A, B, C
+Apple, 965, 387, 100
+Orange, 2944, 3053, 200
+Banana, 4170, 1117, 500
+</code></pre>
+<p><code>(@line)</code></p>
+
+<h2>Area chart</h2>
+<pre><code>
+Name, A, B, C
+Apple, 965, 387, 100
+Orange, 2944, 3053, 200
+Banana, 4170, 1117, 500
+</code></pre>
+<p><code>(@area)</code></p>
+
+<h2>Scatter plot</h2>
+<pre><code>
+A, B
+8, 12
+4, 5.5
+11, 14
+4, 5
+3, 3.5
+6.5, 7
+</code></pre>
+<p><code>(@scatter)</code></p>
+
+<p>Scatter plot with multiple columns:</p>
+<pre><code>
+A, B, C, D
+8, 12, 10, 5
+4, 5.5, 6, 3
+11, 14, 15, 7.5
+4, 5, 7, 3.5
+3, 3.5, 5, 2.5
+6.5, 7, 10, 5
+</code></pre>
+<p><code>(@scatter)</code></p>
+
+<h2>Scatter plot matrix</h2>
+<pre><code>
+A, B, C, D
+8, 12, 10, 5
+4, 5.5, 6, 3
+11, 14, 15, 7.5
+4, 5, 7, 3.5
+3, 3.5, 5, 2.5
+6.5, 7, 10, 5
+</code></pre>
+<p><code>(@scattermatrix)</code></p>
 
 </div>
 </body>
