@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+.dviz-content svg.sparkline {
+	vertical-align: bottom;
+}
+.dviz-content svg.sparkline line {
+	stroke: #666;
+	stroke-width: 1px;
+}
