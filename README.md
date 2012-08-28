@@ -4,6 +4,8 @@ by Alan Kang (@alankang)
 
 DViz is a declarative data visualization library written in Javascript.
 
+See [live example](http://akngs.tumblr.com/post/30393301015/declarative-data-visualization) on tumblr.
+
 
 ## What is Declarative Data Visualization?
 
