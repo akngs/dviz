@@ -47,6 +47,27 @@ var parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
     }
 };
 
+/*
+ * Extract texts from html TABLE element and return a single CSV string.
+ * 
+ * Params:
+ *    $table: jQuery TABLE element
+ * 
+ * Returns:
+ *    CSV string which can be parsed with parse_csv function
+ */
+var table_to_csv = function($table) {
+    var table_buffer = [];
+    $table.find('tr').each(function() {
+        var row_buffer = [];
+        $(this).find('td').each(function() {
+            row_buffer.push($(this).text());
+        });
+        table_buffer.push(row_buffer.join(','));
+    });
+    return table_buffer.join('\n');
+};
+
 /* Return CSS color schemes for nominal data
  * 
  * Params:
@@ -337,7 +358,11 @@ var run = function(content_selector, code_selector) {
 
         if(!data) {
             var $data_node = $this.parent().prev();
-            data = $data_node.text();
+            if($data_node.prop('nodeName').toUpperCase() == 'TABLE') {
+                data = table_to_csv($data_node);
+            } else {
+                data = $data_node.text();
+            }
             $data_node.remove();
         }
         
