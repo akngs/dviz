@@ -231,6 +231,13 @@ var funcs = {
         dviz.funcs.common_chart('AreaChart', $e, data, options);
     },
     /*
+     * Create table chart using Google Visualization API.
+     * See <dviz.funcs.common_chart> for more details.
+     */
+    table: function($e, data, options) {
+        dviz.funcs.common_chart('Table', $e, data, options);
+    },
+    /*
      * Create stepped area chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
      */
