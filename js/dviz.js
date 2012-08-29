@@ -311,7 +311,7 @@ var funcs = {
  * 
  * Params:
  *    content_selector: jQuery extended selector for content area (optional)
- *    code_selector: jQuery extended selector to select declarative commands
+ *    code_selector: jQuery extended selector to select declarative commands (optional)
  */
 var run = function(content_selector, code_selector) {
     content_selector = content_selector || '.dviz-content';
