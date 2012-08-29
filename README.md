@@ -66,6 +66,7 @@ DViz currently supports following declarations:
 *   area (area chart)
 *   steppedarea (stepped area chart)
 *   sparkline (sparkline)
+*   table (table chart)
 
 See [examples](https://github.com/akngs/dviz/blob/master/examples/examples.html)
 for detailed usage.
