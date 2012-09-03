@@ -31,6 +31,13 @@ Paste following code into the `<head>` element of your HTML:
     <script type="text/javascript" src="js/dviz.js"></script>
     <script type="text/javascript">$(function() {dviz.run();});</script>
 
+Or you can add `?autorun=true` parameter instead of direct call to `dviz.run`:
+
+    <link rel="stylesheet" href="css/dviz.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/dviz.js?autorun=true"></script>
+
 And add `dviz-content` class to somewhere in the `<body>` tag. DViz will scan and process all elements in there:
 
     <div class="dviz-content"> ... </div>
