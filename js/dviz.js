@@ -472,7 +472,7 @@ var run = function(content_selector, code_selector) {
 
 // check autorun parameter
 var $dviz_script = $('script').filter(function() {
-    return $(this).attr('src').match(/\/dviz\.js/);
+    return ($(this).attr('src') || '').match(/\/dviz\.js/);
 });
 if($dviz_script.attr('src').match(/\?autorun=true$/)) {
     $(function() {run();});
