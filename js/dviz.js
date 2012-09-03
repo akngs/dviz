@@ -33,6 +33,11 @@ var load_reqs = function(jsids, callback) {
  */
 var load_req = function(jsid, callback) {
     var loader = load_req.loaders[jsid];
+    if(loader.check()) {
+        loader.callback(callback);
+        return;
+    }
+
     var script = document.createElement("script");
     script.src = loader.url;
     script.type = "text/javascript";
@@ -44,13 +49,15 @@ var load_req = function(jsid, callback) {
 load_req.loaders = {
     'd3': {
         'url': 'http://d3js.org/d3.v2.min.js',
+        'check': function() {return !!window['d3'];},
         'callback': function(cb) {cb();}
     },
     'google-viz': {
         'url': 'https://www.google.com/jsapi',
+        'check': function() {return !!window['google'];},
         'callback': function(cb) {
             google.load('visualization', '1.0', {
-                'packages': ['corechart'],
+                'packages': ['corechart', 'table'],
                 'callback': function() {cb();}
             });
         }
