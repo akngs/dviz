@@ -84,7 +84,7 @@ for detailed usage.
 *   [Google Visualization API](https://developers.google.com/chart/interactive/docs/index) (optional to render core charts)
 
 You can explicitly load optional javascript files using `script` tags, but you
-can also let DViz load them when they are needed.
+can also let DViz to load them when they are needed.
 
 ## Browser Support
 
