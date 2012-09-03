@@ -424,47 +424,42 @@ var run = function(content_selector, code_selector) {
     });
 
     // load libraries
+    load_reqs(reqs, function() {
+        // evaluate declarations
+        $targets.each(function() {
+            var $this = $(this);
+            var m = $this.text().match(p);
+            var data = m[1];
+            var func_name = m[2];
+            var options = m[3];
+            if(!(func_name in dviz.funcs)) return;
 
-    // evaluate declarations
-    $targets.each(function() {
-        var $this = $(this);
-        var m = $this.text().match(p);
-        var data = m[1];
-        var func_name = m[2];
-        var options = m[3];
-        if(!(func_name in dviz.funcs)) return;
-
-        if(!data) {
-            var $data_node = $this.parent().prev();
-            if($data_node.prop('nodeName').toUpperCase() == 'TABLE') {
-                data = table_to_csv($data_node);
-            } else {
-                data = $data_node.text();
+            if(!data) {
+                var $data_node = $this.parent().prev();
+                if($data_node.prop('nodeName').toUpperCase() == 'TABLE') {
+                    data = table_to_csv($data_node);
+                } else {
+                    data = $data_node.text();
+                }
+                $data_node.remove();
             }
-            $data_node.remove();
-        }
-        
-        if(options) {
-            eval('options = ' + options);
-        } else {
-            options = {};
-        }
+            
+            if(options) {
+                eval('options = ' + options);
+            } else {
+                options = {};
+            }
 
-        var wrapper = ($this.parent()[0].nodeName == 'pre') ? 'div' : 'span';
-        var $e = $('<' + wrapper + ' />');
-        $this.after($e);
+            var wrapper = ($this.parent()[0].nodeName == 'pre') ? 'div' : 'span';
+            var $e = $('<' + wrapper + ' />');
+            $this.after($e);
 
-        if(!google['visualization']) {
-            google.setOnLoadCallback(function() {
-                dviz.funcs[func_name]($e, data, options);
-            });
-        } else {
             dviz.funcs[func_name]($e, data, options);
-        }
 
-        var $parent = $this.parent();
-        $this.remove();
-        if($parent.children().length == 0) $parent.remove();
+            var $parent = $this.parent();
+            $this.remove();
+            if($parent.children().length == 0) $parent.remove();
+        });
     });
 };
 
