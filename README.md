@@ -27,10 +27,7 @@ Paste following code into the `<head>` element of your HTML:
 
     <link rel="stylesheet" href="css/dviz.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">google.load('visualization', '1.0', {'packages': ['corechart']});</script>
     <script type="text/javascript" src="js/dviz.js"></script>
     <script type="text/javascript">$(function() {dviz.run();});</script>
 
@@ -79,6 +76,8 @@ for detailed usage.
 *   [D3](http://d3js.org) (optional to render sparkline)
 *   [Google Visualization API](https://developers.google.com/chart/interactive/docs/index) (optional to render core charts)
 
+You can explicitly load optional javascript files using <script> tags, but you
+can also let DViz load them when they are needed.
 
 ## Browser Support
 
