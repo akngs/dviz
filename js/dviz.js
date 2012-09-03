@@ -8,6 +8,56 @@ var array_min = function(array) {return Math.min.apply( Math, array );};
 var array_max = function(array) {return Math.max.apply( Math, array );};
 
 /*
+ * Load javascript modules
+ * 
+ * Params:
+ *    jsids: array of predefined script ids
+ *    callback: called right after the job done.
+ */
+var load_reqs = function(jsids, callback) {
+    var loaded = 0;
+    for(var i = 0; i < jsids.length; i++) {
+        load_req(jsids[i], function() {
+            loaded++;
+            if(loaded == jsids.length) callback();
+        });
+    }
+};
+
+/*
+ * Load single javascript module
+ * 
+ * Params:
+ *    jsid: predefined script id
+ *    callback: called right after the job done.
+ */
+var load_req = function(jsid, callback) {
+    var loader = load_req.loaders[jsid];
+    var script = document.createElement("script");
+    script.src = loader.url;
+    script.type = "text/javascript";
+    script.onload = function () {
+        loader.callback(callback);
+    };
+    document.getElementsByTagName("head")[0].appendChild(script);
+};
+load_req.loaders = {
+    'd3': {
+        'url': 'http://d3js.org/d3.v2.min.js',
+        'callback': function(cb) {cb();}
+    },
+    'google-viz': {
+        'url': 'https://www.google.com/jsapi',
+        'callback': function(cb) {
+            google.load('visualization', '1.0', {
+                'packages': ['corechart'],
+                'callback': function() {cb();}
+            });
+        }
+    }
+};
+
+/*
  * Parse raw string and return array(for single line string)
  * or array of array(for multi-line string).
  * 
