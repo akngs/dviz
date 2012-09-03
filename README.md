@@ -76,7 +76,7 @@ for detailed usage.
 *   [D3](http://d3js.org) (optional to render sparkline)
 *   [Google Visualization API](https://developers.google.com/chart/interactive/docs/index) (optional to render core charts)
 
-You can explicitly load optional javascript files using <script> tags, but you
+You can explicitly load optional javascript files using `script` tags, but you
 can also let DViz load them when they are needed.
 
 ## Browser Support
