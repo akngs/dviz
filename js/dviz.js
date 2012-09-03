@@ -346,11 +346,16 @@ var run = function(content_selector, code_selector) {
     code_selector = code_selector || '*:not(pre) > code';
     var p = /(.*)\(@(\w.+?)?\s?(\{.+\})?\)$/;
 
-    $(content_selector + ' ' + code_selector).each(function() {
+    // find declarations
+    var $targets = $(content_selector + ' ' + code_selector).filter(function() {
+        var $this = $(this);
+        return !!$(this).text().match(p);
+    });
+
+    // evaluate declarations
+    $targets.each(function() {
         var $this = $(this);
         var m = $this.text().match(p);
-        if(!m) return;
-
         var data = m[1];
         var func_name = m[2];
         var options = m[3];
