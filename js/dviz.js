@@ -125,6 +125,7 @@ var funcs = {
         }
         $e.append($layout);
     },
+    layout_requires: [],
     /*
      * Create scatter plot using Google Visualization API.
      * 
@@ -151,6 +152,7 @@ var funcs = {
         var chart = new google.visualization.ScatterChart($chart_div[0]);
         chart.draw(table, actual_options);
     },
+    scatter_requires: ['google-viz'],
     /*
      * Create scatter plot matrix using Google Visualization API.
      * 
@@ -223,6 +225,7 @@ var funcs = {
             }
         }
     },
+    scattermatrix_requires: ['google-viz'],
     /*
      * Create horizontal bar chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -230,6 +233,7 @@ var funcs = {
     bar: function($e, data, options) {
         dviz.funcs.common_chart('BarChart', $e, data, options);
     },
+    bar_requires: ['google-viz'],
     /*
      * Create line chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -237,6 +241,7 @@ var funcs = {
     line: function($e, data, options) {
         dviz.funcs.common_chart('LineChart', $e, data, options);
     },
+    line_requires: ['google-viz'],
     /*
      * Create vertical bar chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -244,6 +249,7 @@ var funcs = {
     column: function($e, data, options) {
         dviz.funcs.common_chart('ColumnChart', $e, data, options);
     },
+    column_requires: ['google-viz'],
     /*
      * Create area chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -251,6 +257,7 @@ var funcs = {
     area: function($e, data, options) {
         dviz.funcs.common_chart('AreaChart', $e, data, options);
     },
+    area_requires: ['google-viz'],
     /*
      * Create table chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -258,6 +265,7 @@ var funcs = {
     table: function($e, data, options) {
         dviz.funcs.common_chart('Table', $e, data, options);
     },
+    table_requires: ['google-viz'],
     /*
      * Create stepped area chart using Google Visualization API.
      * See <dviz.funcs.common_chart> for more details.
@@ -265,6 +273,7 @@ var funcs = {
     steppedarea: function($e, data, options) {
         dviz.funcs.common_chart('SteppedAreaChart', $e, data, options);
     },
+    steppedarea_requires: ['google-viz'],
     /*
      * Create specified corechart using Google Visualization API.
      * 
@@ -330,7 +339,8 @@ var funcs = {
             .attr('x2', function(d, i) {return scalex(i + 1);})
             .attr('y1', function(d, i) {return scaley(d[0]);})
             .attr('y2', function(d, i) {return scaley(d[1]);});
-    }
+    },
+    sparkline_requires: ['d3']
 };
 
 
@@ -351,6 +361,19 @@ var run = function(content_selector, code_selector) {
         var $this = $(this);
         return !!$(this).text().match(p);
     });
+
+    // find required libraries
+    var reqs = [];
+    $targets.each(function() {
+        var $this = $(this);
+        var m = $(this).text().match(p);
+        var func_name = m[2];
+        $(dviz.funcs[func_name + '_requires']).each(function(i, v) {
+            if(reqs.indexOf(v) == -1) reqs.push(v);
+        });
+    });
+
+    // load libraries
 
     // evaluate declarations
     $targets.each(function() {
