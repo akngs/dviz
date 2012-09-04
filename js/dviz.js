@@ -63,8 +63,7 @@ load_req.loaders = {
         }
     },
     'opt_graph': {
-        //'url': 'http://akngs.github.com/dviz/js/opt_graph.js',
-        'url': '../js/opt_graph.js',
+        'url': 'http://akngs.github.com/dviz/js/opt_graph.js',
         'check': function() {return !!dviz.opt['graph'];},
         'callback': function(cb) {cb();}
     }
