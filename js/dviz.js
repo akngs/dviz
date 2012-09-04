@@ -1,11 +1,15 @@
-var dviz = (function() {
+(function(window) {
 
+
+var dviz = {};
 
 /*
  * Fast array min/max functions
  */
-var array_min = function(array) {return Math.min.apply( Math, array );};
-var array_max = function(array) {return Math.max.apply( Math, array );};
+dviz = $.extend(dviz, {
+    _array_min: function(array) {return Math.min.apply( Math, array );},
+    _array_max: function(array) {return Math.max.apply( Math, array );}
+});
 
 /*
  * Load javascript modules
@@ -392,7 +396,7 @@ var funcs = {
         var marginy = 4; // @TODO: remove magic number
         var width = xstep * lines.length;
         var scalex = d3.scale.linear().domain([0, lines.length]).range([0, width]);
-        var scaley = d3.scale.linear().domain([array_min(parsed_data), array_max(parsed_data)]).range([height - marginy, 0 + marginy]);
+        var scaley = d3.scale.linear().domain([dviz._array_min(parsed_data), dviz._array_max(parsed_data)]).range([height - marginy, 0 + marginy]);
 
         
         // render
@@ -484,12 +488,14 @@ var run = function(content_selector, code_selector) {
     });
 };
 
-var dviz = {
+dviz = $.extend(dviz, {
     funcs: funcs,
     run: run,
     get_nominal_colors: get_nominal_colors,
     opt: {}
-};
+});
+
+window.dviz = dviz;
 
 // check autorun parameter
 var $dviz_script = $('script').filter(function() {
@@ -499,7 +505,4 @@ if($dviz_script.attr('src').match(/\?autorun=true$/)) {
     $(function() {dviz.run();});
 }
 
-
-return dviz;
-
-})();
+})(window);
