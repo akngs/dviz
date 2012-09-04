@@ -488,6 +488,7 @@ var run = function(content_selector, code_selector) {
 var dviz = {
     funcs: funcs,
     run: run,
+    get_nominal_colors: get_nominal_colors,
     opt: {}
 };
 

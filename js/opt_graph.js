@@ -4,8 +4,10 @@
         var data = parse_graph(data);
         var width = $e.parent().width();
         var height = width * 0.6;
-        // @TODO: use dviz.get_nominal_colors()
-        var color = d3.scale.category20();
+        var color_scheme = dviz.get_nominal_colors(data.group_length);
+        var color = function(n) {
+            return color_scheme[n];
+        };
         // @TODO: remove magic numbers
         var force = d3.layout.force()
             .charge(-120)
@@ -92,7 +94,9 @@
         }
         return {
             'nodes': nodes,
-            'links': links
+            'links': links,
+            // @TODO: implement this
+            'group_length': 1
         };
     };
 })();
