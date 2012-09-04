@@ -87,13 +87,14 @@ load_req.loaders = {
  *    one dimensional array if <raw> has single line
  *    two dimensional array if <raw> has multiple lines
  */
-var parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
+dviz._parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
     if(typeof(raw) != 'string') return raw;
 
     // tokenize
     var table = [];
     $(raw.trim().split('\n')).each(function() {
-        table.push(this.split(','));
+        var tokens = $(this.split(',')).map(function(i, v) {return v.trim();});
+        table.push(tokens.get());
     });
 
     // convert data
@@ -120,7 +121,7 @@ var parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
  *    $table: jQuery TABLE element
  * 
  * Returns:
- *    CSV string which can be parsed with parse_csv function
+ *    CSV string which can be parsed with `dviz._parse_csv` function
  */
 var table_to_csv = function($table) {
     var table_buffer = [];
@@ -207,7 +208,7 @@ var funcs = {
      */
     scatter: function($e, data, options) {
         // prepare data
-        var table = google.visualization.arrayToDataTable(parse_csv(data, true, false));
+        var table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, false));
         
         // merge default options
         var default_options = {
@@ -234,7 +235,7 @@ var funcs = {
      */
     scattermatrix: function($e, data, options) {
         // prepare data
-        var table = google.visualization.arrayToDataTable(parse_csv(data, true, false));
+        var table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, false));
 
         // merge default options
         var default_options = {
@@ -357,7 +358,7 @@ var funcs = {
      */
     common_chart: function(name, $e, data, options) {
         // prepare data
-        table = google.visualization.arrayToDataTable(parse_csv(data, true, true));
+        table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, true));
         
         // merge default options
         var default_options = {
@@ -384,7 +385,7 @@ var funcs = {
      */
     sparkline: function($e, data) {
         // prepare data
-        var parsed_data = parse_csv(data);
+        var parsed_data = dviz._parse_csv(data);
         var lines = [];
         for(var i = 0; i < parsed_data.length - 1; i++) {
             lines.push([parsed_data[i], parsed_data[i + 1]]);
