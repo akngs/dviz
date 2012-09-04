@@ -60,7 +60,7 @@
     };
     
     var parse_graph = function(raw) {
-        var p_link = /^(.+?)->(.+?)$/;
+        var p_link = /^(.+?)-+(?:\((-?\d+)\)-+)?(.+)$/;
         var lines = raw.trim().split('\n');
 
         var node_to_index = {};
@@ -77,9 +77,8 @@
         for(var i = 0; i < lines.length; i++) {
             var m = lines[i].match(p_link);
             var from = m[1].trim();
-            var to = m[2].trim();
-            // @TODO: implement this
-            var value = 1;
+            var value = parseInt(m[2] || '1');
+            var to = m[3].trim();
             // @TODO: implement this
             var group = 0;
 
