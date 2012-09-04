@@ -140,7 +140,12 @@ var get_nominal_colors = function(nums) {
     } else if(nums <= 2) {
         colors = ['#555', '#999'];
     } else {
-        colors = ['rgb(31,119,180)', 'rgb(255,127,14)', 'rgb(44,160,44)', 'rgb(214,39,40)', 'rgb(148,103,189)', 'rgb(140,86,75)'];
+        // From d3's category20
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728',
+                  '#9467bd', '#8c564b', '#e377c2', '#7f7f7f',
+                  '#bcbd22', '#17becf', '#aec7e8', '#ffbb78',
+                  '#98df8a', '#ff9896', '#c5b0d5', '#c49c94',
+                  '#f7b6d2', '#c7c7c7', '#dbdb8d', '#9edae5'];
     }
     return colors;
 };
