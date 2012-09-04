@@ -25,7 +25,7 @@ efficient visualizations on the fly.
 
 Paste following code into the `<head>` element of your HTML:
 
-    <link rel="stylesheet" href="css/dviz.css" />
+    <link rel="stylesheet" href="http://akngs.github.com/dviz/css/dviz.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://akngs.github.com/dviz/js/dviz.js"></script>
@@ -33,7 +33,7 @@ Paste following code into the `<head>` element of your HTML:
 
 Or you can add `?autorun=true` parameter instead of direct call to `dviz.run`:
 
-    <link rel="stylesheet" href="css/dviz.css" />
+    <link rel="stylesheet" href="http://akngs.github.com/dviz/css/dviz.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://akngs.github.com/dviz/js/dviz.js?autorun=true"></script>
