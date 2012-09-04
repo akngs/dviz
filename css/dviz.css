@@ -15,7 +15,7 @@
     stroke: #fff;
     dominant-baseline: central;
     text-anchor: middle;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: normal;
 }
 .dviz-content svg.graph line.link {
