@@ -71,9 +71,14 @@ DViz currently supports following declarations:
 *   steppedarea (stepped area chart)
 *   sparkline (sparkline)
 *   table (table chart)
+*   graph (force-directed graph)
 
-See [examples](https://github.com/akngs/dviz/blob/master/examples/examples.html)
-for detailed usage.
+See following examples:
+
+*   [Basic](https://github.com/akngs/dviz/blob/master/examples/basic.html)
+*   [Lazy loading](https://github.com/akngs/dviz/blob/master/examples/lazyload.html)
+*   [Autorun](https://github.com/akngs/dviz/blob/master/examples/autorun.html)
+*   [Force-directed graph](https://github.com/akngs/dviz/blob/master/examples/opt_graph.html)
 
 
 ### Dependencies
