@@ -61,6 +61,12 @@ load_req.loaders = {
                 'callback': function() {cb();}
             });
         }
+    },
+    'opt_graph': {
+        //'url': 'http://akngs.github.com/dviz/js/opt_graph.js',
+        'url': '../js/opt_graph.js',
+        'check': function() {return !!dviz.opt['graph'];},
+        'callback': function(cb) {cb();}
     }
 };
 
@@ -362,6 +368,10 @@ var funcs = {
         var chart = new google.visualization[name]($chart_div[0]);
         chart.draw(table, actual_options);
     },
+    graph: function($e, data, options) {
+        dviz.opt.graph($e, data, options);
+    },
+    graph_requires: ['d3', 'opt_graph'],
     /*
      * Create sparkline using D3
      * 
@@ -477,7 +487,8 @@ var run = function(content_selector, code_selector) {
 
 var dviz = {
     funcs: funcs,
-    run: run
+    run: run,
+    opt: {}
 };
 
 // check autorun parameter

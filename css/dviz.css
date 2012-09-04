@@ -6,3 +6,19 @@
 	stroke: #666;
 	stroke-width: 1px;
 }
+
+.dviz-content svg.graph circle.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+.dviz-content svg.graph text.node {
+    stroke: #fff;
+    dominant-baseline: central;
+    text-anchor: middle;
+    font-size: 12px;
+    font-weight: normal;
+}
+.dviz-content svg.graph line.link {
+    stroke: #999;
+    stroke-opacity: .6;
+}
