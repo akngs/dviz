@@ -78,7 +78,7 @@ load_req.loaders = {
  * or array of array(for multi-line string).
  * 
  * Params:
- *    raw: raw comma separated string
+ *    raw: comma separated string or javascript function expression
  *    hasColumnLabels: true if first row is header
  *    hasRowLabels: true if first column is header
  * 
@@ -87,12 +87,27 @@ load_req.loaders = {
  *    one dimensional array if <raw> has single line
  *    two dimensional array if <raw> has multiple lines
  */
-dviz._parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
+dviz.parse_data = function(raw, hasColumnLabels, hasRowLabels) {
     if(typeof(raw) != 'string') return raw;
 
-    // tokenize
+    var lines = raw.trim().split('\n');
+
+    // is it javascript expression?
+    var first_line = lines[0].trim();
+    if(first_line.substring(0, 2) == '#!' && first_line.substring(2).split(' ')[0].trim().toLowerCase() == 'javascript') {
+    	lines.shift();
+    	var evaled_expression = null;
+    	try {
+        	eval('evaled_expression = (' + lines.join('\n') + ')');
+    	} catch(e) {
+    		evaled_expression = [];
+    	}
+    	return evaled_expression;
+    }
+
+    // assume CSV and tokenize
     var table = [];
-    $(raw.trim().split('\n')).each(function() {
+    $(lines).each(function() {
         var tokens = $(this.split(',')).map(function(i, v) {return v.trim();});
         table.push(tokens.get());
     });
@@ -121,7 +136,7 @@ dviz._parse_csv = function(raw, hasColumnLabels, hasRowLabels) {
  *    $table: jQuery TABLE element
  * 
  * Returns:
- *    CSV string which can be parsed with `dviz._parse_csv` function
+ *    CSV string which can be parsed with `dviz.parse_data` function
  */
 var table_to_csv = function($table) {
     var table_buffer = [];
@@ -208,7 +223,7 @@ var funcs = {
      */
     scatter: function($e, data, options) {
         // prepare data
-        var table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, false));
+        var table = google.visualization.arrayToDataTable(dviz.parse_data(data, true, false));
         
         // merge default options
         var default_options = {
@@ -235,7 +250,7 @@ var funcs = {
      */
     scattermatrix: function($e, data, options) {
         // prepare data
-        var table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, false));
+        var table = google.visualization.arrayToDataTable(dviz.parse_data(data, true, false));
 
         // merge default options
         var default_options = {
@@ -358,7 +373,7 @@ var funcs = {
      */
     common_chart: function(name, $e, data, options) {
         // prepare data
-        table = google.visualization.arrayToDataTable(dviz._parse_csv(data, true, true));
+        table = google.visualization.arrayToDataTable(dviz.parse_data(data, true, true));
         
         // merge default options
         var default_options = {
@@ -385,7 +400,7 @@ var funcs = {
      */
     sparkline: function($e, data) {
         // prepare data
-        var parsed_data = dviz._parse_csv(data);
+        var parsed_data = dviz.parse_data(data);
         var lines = [];
         for(var i = 0; i < parsed_data.length - 1; i++) {
             lines.push([parsed_data[i], parsed_data[i + 1]]);
